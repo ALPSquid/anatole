@@ -7,23 +7,23 @@
   @include conf.desktop {
     z-index: 2;
     position: fixed;
-    height: 100%;
-    margin-top: 0;
+    height: 95%;
+    margin-top: 20px;
     width: inherit;
     display: flex;
     flex-direction: column;
 
-    @include color.themed() {
-      @include conf.ltr {
-        margin-right: 4px;
-        border-right: color.t('border');
-      }
-
-      @include conf.rtl {
-        margin-left: 4px;
-        border-left: color.t('border');
-      }
-    }
+//     @include color.themed() {
+//       @include conf.ltr {
+//         margin-right: 4px;
+//         border-right: color.t('border');
+//       }
+//
+//       @include conf.rtl {
+//         margin-left: 4px;
+//         border-left: color.t('border');
+//       }
+//     }
   }
 
   &__content {
@@ -63,7 +63,7 @@
     }
 
     &-title {
-      text-transform: uppercase;
+      //text-transform: uppercase;
       font-weight: bold;
       letter-spacing: 2px;
       line-height: 1;

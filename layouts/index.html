@@ -1,22 +1,24 @@
 {{ define "main" }}
-  <div
-    class="post {{ with .Site.Params.doNotLoadAnimations }}
-      .
-    {{ else }}
-      animated fadeInDown
-    {{ end }}"
-  >
-    <div class="post__content">
-      {{ .Content }}
+  {{ if .Content }}
+    <div
+      class="post {{ with .Site.Params.doNotLoadAnimations }}
+        .
+      {{ else }}
+        animated fadeInDown
+      {{ end }}"
+    >
+      <div class="post__content">
+        {{ .Content }}
+      </div>
+
+      <!-- (Optional) Home
+            -- on top of `mainSections` content (aka posts) ;
+            -- as declared in content/_index.md
+
+            One can set `mainSections = [""]` and have the content/_index.md specified here
+        -->
     </div>
-
-    <!-- (Optional) Home
-          -- on top of `mainSections` content (aka posts) ;
-          -- as declared in content/_index.md
-
-          One can set `mainSections = [""]` and have the content/_index.md specified here
-      -->
-  </div>
+  {{ end }}
 
   {{ if .Params.mainSectionsTitle }}
     <div
@@ -54,6 +56,9 @@
         {{ else }}
           <h3><a href="{{ .RelPermalink }}">{{ upper .Title }}</a></h3>
         {{ end }}
+        <div class="post__description">
+          {{ .Description }}
+        </div>
         {{ if .Site.Params.fullPostContent }}
           <p>{{ .Content | safeHTML | plainify }}</p>
         {{ else }}

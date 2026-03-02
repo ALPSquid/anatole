@@ -5,9 +5,9 @@
 .post {
   margin: 30px;
 
-  @include color.themed() {
-    background-color: color.t('accent');
-  }
+//   @include color.themed() {
+//     background-color: color.t('accent');
+//   }
 
   &__meta {
     display: flex;

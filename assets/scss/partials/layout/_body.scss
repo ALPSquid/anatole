@@ -6,6 +6,6 @@
   // work around to style body
   @include color.themed() {
     color: color.t('primary');
-    background-color: color.t('accent');
+    //background-color: color.t('accent');
   }
 }

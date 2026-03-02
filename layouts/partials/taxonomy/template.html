@@ -1,13 +1,24 @@
 {{- $linkClass := .linkClass -}}
 {{- $linkBase := .linkBase -}}
+{{- $pagefindFilter := .pagefindFilter -}}
+{{- $pagefindMeta := .pagefindMeta -}}
 
-
-<span>
+<span class=""
+  {{- if $pagefindMeta -}}
+    data-pagefind-meta="{{ $pagefindMeta }}:{{ (delimit .items ", ") | safeHTML  }}"
+  {{- end -}}
+>
   {{- range $index, $el := .items -}}
     <!-- Replace certain special characters with their URL encoded counterparts -->
     {{- $item := replace . "#" "%23" -}}
     {{- $item = replace $item "." "%2e" -}}
     {{- $link := ( printf "%s/%s/" $linkBase ( $item | urlize ) ) | relLangURL -}}
+  <span class=""
+    {{- if $pagefindFilter -}}
+      data-pagefind-filter="{{ $pagefindFilter }}"
+    {{- end -}}
+  >
     <a class="{{ $linkClass }}" href="{{ $link }}">{{- . -}}</a>
+  </span>
   {{- end -}}
 </span>

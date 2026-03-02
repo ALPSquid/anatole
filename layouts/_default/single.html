@@ -11,17 +11,20 @@
         <img class="post__thumbnail" src="{{ .Params.thumbnail | relURL }}" alt="Thumbnail image" />
       </div>
     {{ end }}
-    <div class="post__content">
+    <div data-pagefind-body class="post__content">
       {{ if (eq .Site.Params.disableTitleCapitalization true) }}
-        <h1>{{ .Title }}</h1>
+        <h1 data-pagefind-meta="title">{{ .Title }}</h1>
       {{ else }}
-        <h1>{{ title .Title }}</h1>
+        <h1 data-pagefind-meta="title">{{ title .Title }}</h1>
       {{ end }}
       {{ if or (eq .Type "post") (eq .Type .Site.Params.postSectionName) }}
+        <div class="post__description">
+          {{ .Description }}
+        </div>
         <ul class="post__meta">
           <li class="post__meta-item">
             <em class="fas fa-calendar-day post__meta-icon"></em>
-            <span class="post__meta-text"
+            <span class="post__meta-text" data-pagefind-meta="date"
               >{{ if isset .Site.Params "singledateformat" }}
                 {{ if .Site.Params.localizedDates }}
                   {{ time.Format .Site.Params.singleDateFormat .Date }}
@@ -39,7 +42,7 @@
               {{ end }}
             </span>
           </li>
-          <li class="post__meta-item">
+          <li class="post__meta-item" data-pagefind-ignore>
             <em class="fas fa-stopwatch post__meta-icon"></em>
             <span class="post__meta-text">{{ i18n "reading_time" .ReadingTime }}</span>
           </li>
@@ -70,7 +73,7 @@
         {{- partial "mermaid.html" . -}}
       {{- end -}}
     </div>
-    <div class="post__footer">
+    <div data-pagefind-body class="post__footer">
       {{ with .Page.Params.Categories }}
         {{ partial "taxonomy/categories.html" . }}
       {{ end }}

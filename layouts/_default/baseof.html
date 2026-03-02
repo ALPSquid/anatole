@@ -9,6 +9,7 @@
     class="html theme--light"
   {{ end }}
 >
+  {{- partial "header_bg.html" . -}}
   {{- partial "head.html" . -}}
   <body class="body">
     <div class="wrapper">
@@ -39,4 +40,5 @@
       {{- partial "analytics/simpleanalytics.html" . -}}
     {{- end -}}
   </body>
+{{- partial "footer.html" (dict "context" . "footerClassModifier" "sidebar") -}}
 </html>

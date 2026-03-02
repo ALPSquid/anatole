@@ -8,35 +8,37 @@
   >
     {{ range .Data.Pages.GroupByDate "2006" }}
       <div class="archive__heading">{{ .Key }}</div>
-      {{ range .Pages }}
-        <ul class="archive__list">
+
+      <ul class="archive__list">
+        {{ range .Pages }}
           <li class="archive__list-item">
             {{ if (eq .Site.Params.disableArchiveTitleStyling true) }}
               <a class="archive__list-title" href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a>
             {{ else }}
               <a class="archive__list-title" href="{{ .RelPermalink }}" title="{{ .Title }}">{{ upper .Title }}</a>
             {{ end }}
-            <div class="archive__list-date">
-              {{ if isset .Site.Params "listdateformat" }}
-                {{ if .Site.Params.localizedDates }}
-                  {{ time.Format .Site.Params.listDateFormat .Date }}
-                {{ else }}
-                  {{ .Date.Format .Site.Params.listDateFormat }}
-                {{ end }}
+            {{ if .Date }}
+              <div class="archive__list-date">
+                {{ if isset .Site.Params "listdateformat" }}
+                  {{ if .Site.Params.localizedDates }}
+                    {{ time.Format .Site.Params.listDateFormat .Date }}
+                  {{ else }}
+                    {{ .Date.Format .Site.Params.listDateFormat }}
+                  {{ end }}
 
-              {{ else }}
-                {{ if .Site.Params.localizedDates }}
-                  {{ time.Format "Jan 2" .Date }}
                 {{ else }}
-                  {{ .Date.Format "Jan 2" }}
-                {{ end }}
+                  {{ if .Site.Params.localizedDates }}
+                    {{ time.Format "Jan 2" .Date }}
+                  {{ else }}
+                    {{ .Date.Format "Jan 2" }}
+                  {{ end }}
 
-              {{ end }}
-            </div>
+                {{ end }}
+              </div>
+            {{ end }}
           </li>
-        </ul>
-      {{ end }}
-
+        {{ end }}
+      </ul>
     {{ end }}
   </div>
 {{ end }}
